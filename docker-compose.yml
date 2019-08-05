@@ -1,0 +1,92 @@
+version: '3.7'
+services:
+  php:
+    container_name: PHP
+    build:
+      context: ./PHP/build
+      dockerfile: Dockerfile
+    image: php
+    volumes:
+      - ${BOOTSTRAP_DIR}:/var/www
+    networks:
+      public_net:
+        ipv4_address: 192.168.0.10
+  apache:
+    container_name: Apache
+    build:
+      context: ./Apache/build
+      dockerfile: Dockerfile
+    image: apache
+    volumes:
+      - ${APACHE_HTTPD_CONF}:/usr/local/apache2/conf/httpd.conf
+      - ${APACHE_VHOSTS_DIR}:/usr/local/apache2/conf/vhosts
+      - ${APACHE_LOG_DIR}:/usr/local/apache2/logs
+      - ${BOOTSTRAP_DIR}:/var/www
+    ports:
+      - 80:80
+    depends_on:
+      - php
+    networks:
+      public_net:
+        ipv4_address: 192.168.0.20
+  redis:
+    container_name: Redis
+    build:
+      context: ./Redis/build
+      dockerfile: Dockerfile
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      public_net:
+        ipv4_address: 192.168.0.70
+  mysql:
+    container_name: MySQL
+    build:
+      context: ./MySQL/build
+      dockerfile: Dockerfile
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    volumes:
+      - ${MYSQL_DUMP_DIR}:/docker-entrypoint-initdb.d
+      - ${MYSQL_CONF_DIR}:/etc/mysql/conf.d
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR}:/var/log/mysql
+    ports:
+      - 3306:3306
+    depends_on:
+      - php
+      - apache
+    networks:
+      public_net:
+        ipv4_address: 192.168.0.30
+  phpmyadmin:
+    container_name: PhpMyAdmin
+    build:
+      context: ./PhpMyAdmin/build
+      dockerfile: Dockerfile
+    image: phpmyadmin
+    ports:
+      - 8000:80
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+    networks:
+      public_net:
+        ipv4_address: 192.168.0.40
+networks:
+  public_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24
