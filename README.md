@@ -10,9 +10,9 @@ docker-compose up
 #### Notes
 
 There are 3 ways to execute PHP scripts on a web server.  
-*Apache module
-*CGI
-*FastCGI
+* Apache module
+* CGI
+* FastCGI
 
 #### Apache Module (mod_php)
 
