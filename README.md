@@ -17,14 +17,14 @@ There are 3 ways to execute PHP scripts on a web server.
 #### Apache Module (mod_php)
 
 When using mod_php the PHP interpreter is embedded in each Apache process that’s spawned on the server.  
-This way every Apache worker is able to handle and execute PHP scripts itself removing the need to deal with any external processes; unlike CGI or FastCGI.  
-This makes it very useful for sites that are ‘PHP heavy’ where lots of requests are likely to contain PHP code (such as WordPress, Drupal, Joomla, etc.) because all the requests can be handled by Apache.  
+This way every Apache worker is able to handle and execute PHP scripts itself removing the need to deal with any external processes; unlike CGI or FastCGI.    
+This makes it very useful for sites that are ‘PHP heavy’ where lots of requests are likely to contain PHP code (such as WordPress, Drupal, Joomla, etc.) because all the requests can be handled by Apache.    
 The downside to this is that the footprint for each Apache process is larger as it requires more system resources with the PHP interpreter embedded. Even when serving static content such as images, text and style sheets where no PHP code needs to be executed, the process still contains the PHP interpreter.
 
 #### CGI
 
-Executing PHP scripts with a CGI application is the legacy way of running applications on a web server, it’s highly inefficient and rarely used.  
-It was originally introduced in the 1990’s but was deemed to be too inefficient to use on anything other than very small sites.  
+Executing PHP scripts with a CGI application is the legacy way of running applications on a web server, it’s highly inefficient and rarely used.
+It was originally introduced in the 1990’s but was deemed to be too inefficient to use on anything other than very small sites.    
 The inefficiencies of running PHP with CGI support spawn from requiring a new process to be created each time any PHP code needs to be executed.  
 As you can imagine, on busier sites or PHP based applications it can be very resource intensive.
 
