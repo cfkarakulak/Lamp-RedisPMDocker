@@ -29,13 +29,13 @@ The inefficiencies of running PHP with CGI support spawn from requiring a new pr
 #### FastCGI
 
 FastCGI was introduced as a middle ground between the PHP Apache Module and the CGI application.  
-It allows scripts to be executed by an interpreter outside of the web server and includes the security benefits of CGI but doesn’t include any of the inefficiencies of CGI.  
+It allows scripts to be executed by an interpreter outside of the web server and includes the security benefits of CGI but doesn’t include any of the inefficiencies of CGI.<br/><br/>
 When executing PHP scripts with FastCGI each request is passed from the web server to FastCGI via a communication socket. This allows for much greater scalability as the web server and the PHP interpreter can be split into their own individual server environments if necessary.  
 However a similar end result can also be achieved using nginx in front of Apache (such that nginx handles basic requests itself and only passes dynamic requests to Apache) so this point alone doesn’t determine the ideal choice for a given scenario.
 
 [Read more](https://blog.layershift.com/which-php-mode-apache-vs-cgi-vs-fastcgi/)
 
-- This project uses FastCGI module to interpret PHP files, therefore .htaccess directives can not be used.
+This project uses FastCGI module to interpret PHP files, therefore .htaccess directives can not be used.
 
 ```
 - Linux (Alpine)
