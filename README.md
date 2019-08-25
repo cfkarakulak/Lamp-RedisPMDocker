@@ -23,10 +23,8 @@ The downside to this is that the footprint for each Apache process is larger as 
 
 #### CGI
 
-Executing PHP scripts with a CGI application is the legacy way of running applications on a web server, it’s highly inefficient and rarely used.
-It was originally introduced in the 1990’s but was deemed to be too inefficient to use on anything other than very small sites.    
-The inefficiencies of running PHP with CGI support spawn from requiring a new process to be created each time any PHP code needs to be executed.  
-As you can imagine, on busier sites or PHP based applications it can be very resource intensive.
+Executing PHP scripts with a CGI application is the legacy way of running applications on a web server, it’s highly inefficient and rarely used.<br/>
+The inefficiencies of running PHP with CGI support spawn from requiring a new process to be created each time any PHP code needs to be executed.
 
 #### FastCGI
 
