@@ -46,4 +46,4 @@ This project uses FastCGI module to interpret PHP files, therefore .htaccess dir
 - PhpMyAdmin:latest
 ```
 
-After initalizing containers, head over to http://localhost and BAM !
+After initalizing containers, head over to http://localhost and start building awesome stuff.
