@@ -9,15 +9,15 @@ docker-compose up
 
 #### Notes
 
-There are 3 ways to execute PHP scripts on a web server.  
+There are 3 ways to execute PHP scripts on a web server.\
 * Apache module
 * CGI
 * FastCGI
 
 #### Apache Module (mod_php)
 
-When using mod_php the PHP interpreter is embedded in each Apache process that’s spawned on the server.  
-This way every Apache worker is able to handle and execute PHP scripts itself removing the need to deal with any external processes; unlike CGI or FastCGI.    
+When using mod_php the PHP interpreter is embedded in each Apache process that’s spawned on the server.\
+This way every Apache worker is able to handle and execute PHP scripts itself removing the need to deal with any external processes; unlike CGI or FastCGI.\\
 This makes it very useful for sites that are ‘PHP heavy’ where lots of requests are likely to contain PHP code (such as WordPress, Drupal, Joomla, etc.) because all the requests can be handled by Apache.    
 The downside to this is that the footprint for each Apache process is larger as it requires more system resources with the PHP interpreter embedded. Even when serving static content such as images, text and style sheets where no PHP code needs to be executed, the process still contains the PHP interpreter.
 
